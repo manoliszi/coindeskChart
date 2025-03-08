@@ -46,15 +46,15 @@ const props = defineProps({
 const emit = defineEmits(['click']);
 
 const hasIcon = computed(() => {
-    return props.icon !== ''
+  return props.icon !== ''
 })
 const hasLabel = computed(() => {
-    return props.label !== '' || !hasIcon.value
+  return props.label !== '' || !hasIcon.value
 })
 const hasIconOnly = computed(() => {
-    return hasIcon.value && !hasLabel.value;
+  return hasIcon.value && !hasLabel.value;
 })
 function btnClick(e) {
-    emit('click', e);
+  emit('click', e);
 }
 </script>

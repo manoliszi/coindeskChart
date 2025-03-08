@@ -70,10 +70,10 @@ function formatDate(date) {
 
 <style>
 .list-items {
-    display: flex !important;
-    margin-top: 20px;
+  display: flex !important;
+  margin-top: 20px;
 }
 .item-value {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 </style>

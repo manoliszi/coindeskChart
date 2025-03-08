@@ -7,7 +7,7 @@
       density="compact"
     >
       <p style="margin-bottom: 0 !important;">
-        There was an error while trying to fetch the bitcoin data. Please try again later
+        {{ snackbarMessage }}
       </p>
     </v-snackbar>
     <user-profile />
@@ -63,34 +63,38 @@ const store = useMainStore()
 const dateFrom = ref(Date.now())
 const dateTo = ref(Date.now())
 const snackbar = ref(false);
+const snackbarMessage = ref('');
 
 const chartData = computed(() => store.getChartData);
 
 function formatToYYYYMMDD(input) {
-    const date = new Date(input);
-    return date.toISOString().split('T')[0]; // Extract YYYY-MM-DD
+  const date = new Date(input);
+  return date.toISOString().split('T')[0];
 }
 
-function calculateDateDifference(date1, date2) {
-  const startDate = new Date(date1);
-  const endDate = new Date(date2);
-
+function calculateDateDifference(startDate, endDate) {
   if (isNaN(startDate) || isNaN(endDate)) {
     throw new Error("One or both of the dates are invalid.");
   }
 
   const timeDifference = endDate - startDate;
   const daysDifference = timeDifference / (1000 * 3600 * 24);
-  return Math.abs(daysDifference) + 1; // Return the absolute difference in days
+  return Math.abs(daysDifference) + 1;
 }
 
 async function getCoinHistory() {
-  let from = formatToYYYYMMDD(dateFrom.value);
-  let to = formatToYYYYMMDD(dateTo.value);
-  let limit = calculateDateDifference(from, to)
-  let resp = await store.getBitcoinHistory(limit)
+  const startDate = new Date(dateFrom.value);
+  const endDate = new Date(dateTo.value);
+  if (endDate < startDate) {
+    snackbar.value = true
+    snackbarMessage.value = 'Make sure the date from is before date to and try again'
+    return;
+  }
+  const numberOfDays = calculateDateDifference(startDate, endDate)
+  const resp = await store.getBitcoinHistory(numberOfDays)
   if (!resp.ok) {
     snackbar.value = true
+    snackbarMessage.value = 'There was an error while trying to fetch the bitcoin data. Please try again later'
   }
 }
 </script>

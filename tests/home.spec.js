@@ -48,7 +48,7 @@ test.describe('Home Page', () => {
 
     await page.goto('http://localhost:3000'); // Change to your actual URL
 
-    //  select dates
+    // select dates
     await page.click('#dateFrom')
     await page.fill('#dateFrom input', '2024/03/02');
     await page.locator('.dp__action_select').first().click();
