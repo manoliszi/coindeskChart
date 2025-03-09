@@ -12,6 +12,7 @@
     :cancel-text="'Cancel'"
     :clearable="clearable"
     :auto-apply="autoApply"
+    :disabled="disabled"
     @update:model-value="onChange"
   >
     <template #dp-input="{ value, onInput }">
@@ -20,6 +21,7 @@
         :label="label"
         variant="outlined"
         density="compact"
+        :disabled="disabled"
         required
         hide-details
         @update:model-value="onInput"
@@ -39,6 +41,7 @@ const props = defineProps({
   label: {type: String, default: 'datetime'},
   clearable: {type: Boolean, default: true},
   autoApply: {type: Boolean, default: false},
+  disabled: {type: Boolean, default: false}
 });
 const emit = defineEmits(['update:modelValue']);
 

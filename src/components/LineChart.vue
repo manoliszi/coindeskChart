@@ -7,12 +7,16 @@
 
       <v-divider class="my-3" />
 
-      <apexchart
-        type="line"
-        height="350"
-        :options="chartOptions"
-        :series="series"
-      />
+      <div class="chart-container">
+        <div class="chart-wrapper">
+          <apexchart
+            type="line"
+            height="350"
+            :options="chartOptions"
+            :series="series"
+          />
+        </div>
+      </div>
     </v-card>
   </v-container>
 </template>
@@ -59,5 +63,16 @@ const series = computed(() => [
 </script>
 
 <style scoped>
+.chart-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
 
+.chart-wrapper {
+  min-width: 600px;
+  max-width: 1000px;
+  margin: auto;
+}
 </style>
