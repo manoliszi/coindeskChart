@@ -53,10 +53,6 @@ test.describe('Home Page', () => {
     await page.fill('#dateFrom input', '2024/03/02');
     await page.locator('.dp__action_select').first().click();
 
-    await page.click('#dateTo')
-    await page.fill('#dateTo input', '2024/04/02');
-    await page.locator('.dp__action_select').first().click();
-
     await page.click('#applyDates');
 
     // make sure that upper and lower values are present
